@@ -63,10 +63,11 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         /* تأثيرات البطاقات الإضافية لقسم صواب وخطأ */
-        .perspective-1000 { perspective: 1000px; }
-        .preserve-3d { transform-style: preserve-3d; }
+        .perspective-1000 { perspective: 1000px; -webkit-perspective: 1000px; }
+        .preserve-3d { transform-style: preserve-3d; -webkit-transform-style: preserve-3d; }
         .backface-hidden { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
+        .rotate-y-180 { transform: rotateY(180deg); -webkit-transform: rotateY(180deg); }
+        .rotate-y-0 { transform: rotateY(0deg); -webkit-transform: rotateY(0deg); }
     </style>
 </head>
 <body class="selection:bg-violet-200 flex flex-col min-h-[100dvh]">
@@ -522,41 +523,45 @@
                                 <div id="tf-card-inner" class="w-full h-full relative preserve-3d transition-transform duration-500 ${state.isHintFlipped ? 'rotate-y-180' : ''}">
                                     
                                     <!-- وجه البطاقة (السؤال) -->
-                                    <div class="backface-hidden w-full h-full bg-white border-2 border-slate-200 rounded-3xl shadow-lg flex flex-col absolute inset-0 overflow-hidden">
-                                        <!-- طبقات الألوان عند السحب -->
-                                        <div id="tf-overlay-right" class="absolute inset-0 bg-emerald-500/90 z-20 opacity-0 transition-opacity flex justify-center items-center pointer-events-none">
-                                            <div class="bg-white p-4 rounded-full text-emerald-500 shadow-xl scale-150">${ICONS.checkCircleLarge}</div>
-                                        </div>
-                                        <div id="tf-overlay-left" class="absolute inset-0 bg-rose-500/90 z-20 opacity-0 transition-opacity flex justify-center items-center pointer-events-none">
-                                            <div class="bg-white p-4 rounded-full text-rose-500 shadow-xl scale-150">${ICONS.xCircleLarge}</div>
-                                        </div>
+                                    <div class="backface-hidden rotate-y-0 w-full h-full absolute inset-0 z-10">
+                                        <div class="w-full h-full bg-white border-2 border-slate-200 rounded-3xl shadow-lg flex flex-col overflow-hidden relative">
+                                            <!-- طبقات الألوان عند السحب -->
+                                            <div id="tf-overlay-right" class="absolute inset-0 bg-emerald-500/90 z-20 opacity-0 transition-opacity flex justify-center items-center pointer-events-none">
+                                                <div class="bg-white p-4 rounded-full text-emerald-500 shadow-xl scale-150">${ICONS.checkCircleLarge}</div>
+                                            </div>
+                                            <div id="tf-overlay-left" class="absolute inset-0 bg-rose-500/90 z-20 opacity-0 transition-opacity flex justify-center items-center pointer-events-none">
+                                                <div class="bg-white p-4 rounded-full text-rose-500 shadow-xl scale-150">${ICONS.xCircleLarge}</div>
+                                            </div>
 
-                                        <!-- محتوى الوجه -->
-                                        <div class="bg-slate-50 p-4 border-b border-slate-100 flex justify-between items-center z-10">
-                                            <span class="text-${theme}-600 font-bold text-lg md:text-xl">البطاقة ${toArabicNum(state.currentIndex + 1)}</span>
-                                            <button onclick="App.toggleTfHint();" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm md:text-base font-bold transition-all text-amber-500 hover:bg-amber-50 active:scale-95 z-30 relative cursor-pointer">
-                                                💡 تلميح
-                                            </button>
-                                        </div>
-                                        <div class="flex-grow flex items-center justify-center p-6 text-center z-10 pointer-events-none">
-                                            <h3 class="text-2xl md:text-3xl font-semibold leading-relaxed text-slate-800">«${q.text}»</h3>
-                                        </div>
-                                        <div class="p-4 bg-slate-50/50 text-center text-slate-400 text-sm font-medium z-10 pointer-events-none border-t border-slate-100">
-                                            اسحب يمينًا للصواب 🟢 ، ويسارًا للخطأ 🔴
+                                            <!-- محتوى الوجه -->
+                                            <div class="bg-slate-50 p-4 border-b border-slate-100 flex justify-between items-center z-10">
+                                                <span class="text-${theme}-600 font-bold text-lg md:text-xl">البطاقة ${toArabicNum(state.currentIndex + 1)}</span>
+                                                <button onclick="App.toggleTfHint();" class="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm md:text-base font-bold transition-all text-amber-500 hover:bg-amber-50 active:scale-95 z-30 relative cursor-pointer">
+                                                    💡 تلميح
+                                                </button>
+                                            </div>
+                                            <div class="flex-grow flex items-center justify-center p-6 text-center z-10 pointer-events-none">
+                                                <h3 class="text-2xl md:text-3xl font-semibold leading-relaxed text-slate-800">«${q.text}»</h3>
+                                            </div>
+                                            <div class="p-4 bg-slate-50/50 text-center text-slate-400 text-sm font-medium z-10 pointer-events-none border-t border-slate-100">
+                                                اسحب يمينًا للصواب 🟢 ، ويسارًا للخطأ 🔴
+                                            </div>
                                         </div>
                                     </div>
                                     
                                     <!-- ظهر البطاقة (التلميح) -->
-                                    <div class="backface-hidden w-full h-full bg-amber-50 border-2 border-amber-200 rounded-3xl shadow-lg flex flex-col absolute inset-0 rotate-y-180 overflow-hidden">
-                                        <div class="bg-amber-100 p-4 border-b border-amber-200 flex justify-center items-center z-20 relative">
-                                            <span class="text-amber-700 font-bold text-lg md:text-xl">تلميح ذكي</span>
-                                        </div>
-                                        <div class="flex-grow flex flex-col items-center justify-center p-6 text-center relative pointer-events-none">
-                                            <span class="text-6xl mb-4 opacity-50">💡</span>
-                                            <p class="text-xl md:text-2xl font-medium leading-relaxed text-amber-900">${q.hint}</p>
-                                        </div>
-                                        <div class="p-5 flex justify-center z-10 relative">
-                                            <button onclick="App.toggleTfHint();" class="bg-amber-200 text-amber-800 px-6 py-2.5 rounded-full font-bold shadow-sm active:scale-95 transition-transform hover:bg-amber-300 cursor-pointer">عودة للسؤال</button>
+                                    <div class="backface-hidden rotate-y-180 w-full h-full absolute inset-0 z-0">
+                                        <div class="w-full h-full bg-amber-50 border-2 border-amber-200 rounded-3xl shadow-lg flex flex-col overflow-hidden relative">
+                                            <div class="bg-amber-100 p-4 border-b border-amber-200 flex justify-center items-center z-20 relative">
+                                                <span class="text-amber-700 font-bold text-lg md:text-xl">تلميح ذكي</span>
+                                            </div>
+                                            <div class="flex-grow flex flex-col items-center justify-center p-6 text-center relative pointer-events-none">
+                                                <span class="text-6xl mb-4 opacity-50">💡</span>
+                                                <p class="text-xl md:text-2xl font-medium leading-relaxed text-amber-900">${q.hint}</p>
+                                            </div>
+                                            <div class="p-5 flex justify-center z-10 relative">
+                                                <button onclick="App.toggleTfHint();" class="bg-amber-200 text-amber-800 px-6 py-2.5 rounded-full font-bold shadow-sm active:scale-95 transition-transform hover:bg-amber-300 cursor-pointer">عودة للسؤال</button>
+                                            </div>
                                         </div>
                                     </div>
 
@@ -582,52 +587,56 @@
                             <div id="tf-feedback-inner" class="w-full h-full relative preserve-3d transition-transform duration-500 ${state.isFeedbackFlipped ? 'rotate-y-180' : ''}">
                                 
                                 <!-- الوجه (التغذية الراجعة) -->
-                                <div class="backface-hidden w-full h-full bg-white border-2 ${isCorrect ? 'border-emerald-200' : 'border-rose-200'} rounded-3xl shadow-lg flex flex-col overflow-hidden text-center absolute inset-0">
-                                    
-                                    <!-- شريط علوي قابل للنقر بالكامل -->
-                                    <div onclick="App.toggleTfFeedbackFlip()" style="transform: translateZ(1px);" class="bg-slate-50 hover:bg-slate-100 p-4 border-b border-slate-100 flex justify-between items-center z-30 shrink-0 relative cursor-pointer transition-colors group" title="اضغط لقلب البطاقة">
-                                        <span class="text-slate-500 font-bold text-lg md:text-xl pointer-events-none">النتيجة</span>
-                                        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white shadow-sm border ${isCorrect ? 'border-emerald-100 text-emerald-600 group-hover:bg-emerald-50' : 'border-rose-100 text-rose-600 group-hover:bg-rose-50'} font-bold text-sm transition-colors pointer-events-none">
-                                            السؤال ${ICONS.refresh}
+                                <div class="backface-hidden rotate-y-0 w-full h-full absolute inset-0 z-10">
+                                    <div class="w-full h-full bg-white border-2 ${isCorrect ? 'border-emerald-200' : 'border-rose-200'} rounded-3xl shadow-lg flex flex-col overflow-hidden text-center relative">
+                                        
+                                        <!-- شريط علوي قابل للنقر بالكامل -->
+                                        <div onclick="App.toggleTfFeedbackFlip()" style="transform: translateZ(1px);" class="bg-slate-50 hover:bg-slate-100 p-4 border-b border-slate-100 flex justify-between items-center z-30 shrink-0 relative cursor-pointer transition-colors group" title="اضغط لقلب البطاقة">
+                                            <span class="text-slate-500 font-bold text-lg md:text-xl pointer-events-none">النتيجة</span>
+                                            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white shadow-sm border ${isCorrect ? 'border-emerald-100 text-emerald-600 group-hover:bg-emerald-50' : 'border-rose-100 text-rose-600 group-hover:bg-rose-50'} font-bold text-sm transition-colors pointer-events-none">
+                                                السؤال ${ICONS.refresh}
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="p-4 md:p-6 ${isCorrect ? 'bg-emerald-50' : 'bg-rose-50'} flex flex-col items-center border-b ${isCorrect ? 'border-emerald-100' : 'border-rose-100'} shrink-0 relative">
-                                        <div class="${isCorrect ? 'text-emerald-500' : 'text-rose-500'} scale-125 md:scale-150 mb-2 md:mb-3">
-                                            ${isCorrect ? ICONS.checkCircleLarge : ICONS.xCircleLarge}
+                                        
+                                        <div class="p-4 md:p-6 ${isCorrect ? 'bg-emerald-50' : 'bg-rose-50'} flex flex-col items-center border-b ${isCorrect ? 'border-emerald-100' : 'border-rose-100'} shrink-0 relative">
+                                            <div class="${isCorrect ? 'text-emerald-500' : 'text-rose-500'} scale-125 md:scale-150 mb-2 md:mb-3">
+                                                ${isCorrect ? ICONS.checkCircleLarge : ICONS.xCircleLarge}
+                                            </div>
+                                            <h3 class="text-xl md:text-2xl font-bold ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">
+                                                ${isCorrect ? 'إجابة صحيحة!' : 'إجابة خاطئة!'}
+                                            </h3>
                                         </div>
-                                        <h3 class="text-xl md:text-2xl font-bold ${isCorrect ? 'text-emerald-700' : 'text-rose-700'}">
-                                            ${isCorrect ? 'إجابة صحيحة!' : 'إجابة خاطئة!'}
-                                        </h3>
-                                    </div>
-                                    <div class="p-4 md:p-6 flex-grow flex items-center justify-center overflow-y-auto relative">
-                                        <p class="text-lg md:text-xl font-semibold leading-relaxed text-slate-800 relative z-10">
-                                            ${q.explanation}
-                                        </p>
-                                    </div>
-                                    <div class="p-4 md:p-6 bg-slate-50 border-t border-slate-100 shrink-0 relative z-20">
-                                        <button onclick="App.handleTfNext()" class="w-full py-3 md:py-4 rounded-xl font-bold text-xl text-white shadow-md transition-transform active:scale-95 ${isCorrect ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-rose-600 hover:bg-rose-700'}">
-                                            السؤال التالي
-                                        </button>
+                                        <div class="p-4 md:p-6 flex-grow flex items-center justify-center overflow-y-auto relative">
+                                            <p class="text-lg md:text-xl font-semibold leading-relaxed text-slate-800 relative z-10">
+                                                ${q.explanation}
+                                            </p>
+                                        </div>
+                                        <div class="p-4 md:p-6 bg-slate-50 border-t border-slate-100 shrink-0 relative z-20">
+                                            <button onclick="App.handleTfNext()" class="w-full py-3 md:py-4 rounded-xl font-bold text-xl text-white shadow-md transition-transform active:scale-95 ${isCorrect ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-rose-600 hover:bg-rose-700'}">
+                                                السؤال التالي
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                                 
                                 <!-- الظهر (السؤال الأصلي) -->
-                                <div class="backface-hidden w-full h-full bg-slate-50 border-2 border-slate-200 rounded-3xl shadow-lg flex flex-col overflow-hidden text-center absolute inset-0 rotate-y-180">
-                                    
-                                    <!-- شريط علوي قابل للنقر بالكامل -->
-                                    <div onclick="App.toggleTfFeedbackFlip()" style="transform: translateZ(1px);" class="bg-slate-200/50 hover:bg-slate-200 p-4 border-b border-slate-200 flex justify-between items-center z-30 relative shrink-0 cursor-pointer transition-colors group" title="اضغط لقلب البطاقة">
-                                        <span class="text-slate-600 font-bold text-lg md:text-xl pointer-events-none">السؤال الأصلي</span>
-                                        <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white shadow-sm border border-slate-200 text-slate-600 group-hover:bg-slate-50 font-bold text-sm transition-colors pointer-events-none">
-                                            الشرح ${ICONS.refresh}
+                                <div class="backface-hidden rotate-y-180 w-full h-full absolute inset-0 z-0">
+                                    <div class="w-full h-full bg-slate-50 border-2 border-slate-200 rounded-3xl shadow-lg flex flex-col overflow-hidden text-center relative">
+                                        
+                                        <!-- شريط علوي قابل للنقر بالكامل -->
+                                        <div onclick="App.toggleTfFeedbackFlip()" style="transform: translateZ(1px);" class="bg-slate-200/50 hover:bg-slate-200 p-4 border-b border-slate-200 flex justify-between items-center z-30 relative shrink-0 cursor-pointer transition-colors group" title="اضغط لقلب البطاقة">
+                                            <span class="text-slate-600 font-bold text-lg md:text-xl pointer-events-none">السؤال الأصلي</span>
+                                            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white shadow-sm border border-slate-200 text-slate-600 group-hover:bg-slate-50 font-bold text-sm transition-colors pointer-events-none">
+                                                الشرح ${ICONS.refresh}
+                                            </div>
                                         </div>
-                                    </div>
-                                    
-                                    <div class="flex-grow flex items-center justify-center p-6 text-center relative pointer-events-none overflow-hidden">
-                                        <div class="absolute inset-0 flex items-center justify-center opacity-5 scale-[2] text-${isCorrect ? 'emerald' : 'rose'}-500">
-                                            ${isCorrect ? ICONS.checkCircleLarge : ICONS.xCircleLarge}
+                                        
+                                        <div class="flex-grow flex items-center justify-center p-6 text-center relative pointer-events-none overflow-hidden">
+                                            <div class="absolute inset-0 flex items-center justify-center opacity-5 scale-[2] text-${isCorrect ? 'emerald' : 'rose'}-500">
+                                                ${isCorrect ? ICONS.checkCircleLarge : ICONS.xCircleLarge}
+                                            </div>
+                                            <h3 class="text-2xl md:text-3xl font-semibold leading-relaxed text-slate-800 z-10">«${q.text}»</h3>
                                         </div>
-                                        <h3 class="text-2xl md:text-3xl font-semibold leading-relaxed text-slate-800 z-10">«${q.text}»</h3>
                                     </div>
                                 </div>
 

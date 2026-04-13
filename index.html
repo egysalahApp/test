@@ -503,14 +503,15 @@
             renderTfSwipeSectionHTML() {
                 const theme = SECTIONS.find(s => s.id === 'tf').theme;
                 const progress = this.state.progress['tf'];
-                const isComplete = progress.total > 0 && progress.answered === progress.total;
                 const state = this.state.tfUI;
+                const isComplete = state.currentIndex >= this.state.tfData.length;
 
                 let html = '<div class="fade-in">';
 
                 if (!isComplete && this.state.tfData[state.currentIndex]) {
                     const qState = this.state.tfData[state.currentIndex];
                     const q = qState.originalQuestion;
+                    const isLastQuestion = state.currentIndex === this.state.tfData.length - 1;
 
                     if (state.status === 'idle') {
                         html += `
@@ -613,7 +614,7 @@
                                         </div>
                                         <div class="p-4 md:p-6 bg-slate-50 border-t border-slate-100 shrink-0 relative z-20">
                                             <button onclick="App.handleTfNext()" class="w-full py-3 md:py-4 rounded-xl font-bold text-xl text-white shadow-md transition-transform active:scale-95 ${isCorrect ? 'bg-emerald-600 hover:bg-emerald-700' : 'bg-rose-600 hover:bg-rose-700'}">
-                                                السؤال التالي
+                                                ${isLastQuestion ? 'إظهار النتيجة' : 'السؤال التالي'}
                                             </button>
                                         </div>
                                     </div>
@@ -1350,8 +1351,11 @@
 
             checkFinalEvaluation() {
                 const isAllComplete = Object.values(this.state.progress).filter(p => p.total > 0).every(p => p.answered === p.total);
+                const isTfDone = this.state.tfUI.currentIndex >= this.state.tfData.length;
+                const isClassifyDone = this.state.classifyData.currentIndex >= this.state.classifyData.questions.length;
                 const container = document.getElementById('final-evaluation-container');
-                if (isAllComplete && this.state.activeTab !== 'intro') {
+                
+                if (isAllComplete && isTfDone && isClassifyDone && this.state.activeTab !== 'intro') {
                     const totalScore = Object.values(this.state.progress).reduce((acc, p) => acc + p.score, 0);
                     const totalQuestions = Object.values(this.state.progress).reduce((acc, p) => acc + p.total, 0);
                     const percentage = Math.round((totalScore / totalQuestions) * 100);

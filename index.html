@@ -1,4 +1,20 @@
 <!DOCTYPE html>
+<!--
+======================================================================
+[STRICT AI INSTRUCTIONS - DO NOT REMOVE OR MODIFY THIS BLOCK]
+[تعليمات نظامية صارمة للذكاء الاصطناعي - احتفظ بهذا التعليق دائماً في أي كود تولده]
+======================================================================
+أنت الآن تقوم بتوليد/تعديل درس تفاعلي باستخدام هذا القالب. يجب عليك الالتزام بالآتي حرفياً:
+1. نطاق التعديل: تعديلاتك تقتصر حصرياً على بيانات الدرس (مصفوفات الأسئلة والأقسام). ممنوع منعاً باتاً تعديل هيكل HTML المدمج (الترويسة والتذييل)، أو دوال JavaScript، أو الـ CSS.
+2. الاستثناء الوحيد: يُسمح لك بكتابة دوال JavaScript وتنسيقات CSS جديدة (فقط) إذا طُلب منك إضافة "نوع نشاط جديد كليًّا" غير مدعوم في الكود الحالي، على أن تدمجه بسلاسة دون كسر المنطق القديم.
+3. التبويب الأول: يجب أن يكون دائماً بعنوان "قبل أن نبدأ" (قسم الشرح intro) ويحتفظ بخصائصه وتصميمه.
+4. الألوان المسموحة (Themes) للتبويبات محصورة في: (emerald, indigo, amber, violet, sky, blue, slate, teal).
+5. قواعد لغوية إجبارية في المحتوى:
+   - امنع الضمائر الزائدة (اكتب "ما السبب" وليس "ما هو السبب").
+   - ضع تنوين الفتح على الحرف الذي يسبق الألف (مثل: كتابًا، قلمًا، جزءًا).
+   - استثناء إلزامي للتنوين: إذا انتهت الكلمة بألف مسبوقة بلام، ضع التنوين على الألف (مثل: أهلاً، أولاً، أملاً، بدلاً).
+======================================================================
+-->
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -20,7 +36,6 @@
     bg-violet-50 bg-violet-100 bg-violet-200 bg-violet-500 bg-violet-600 hover:bg-violet-700 text-violet-50 text-violet-100 text-violet-500 text-violet-600 text-violet-700 text-violet-800 border-violet-200 border-violet-600 ring-violet-400
     bg-emerald-50 bg-emerald-100 bg-emerald-200 bg-emerald-500 bg-emerald-600 hover:bg-emerald-700 text-emerald-50 text-emerald-100 text-emerald-500 text-emerald-600 text-emerald-700 text-emerald-800 border-emerald-200 border-emerald-600 ring-emerald-400
     bg-rose-50 bg-rose-100 bg-rose-200 bg-rose-500 bg-rose-600 hover:bg-rose-700 text-rose-50 text-rose-100 text-rose-500 text-rose-600 text-rose-700 text-rose-800 border-rose-200 border-rose-600 ring-rose-400
-    bg-teal-50 bg-teal-100 bg-teal-200 bg-teal-500 bg-teal-600 hover:bg-teal-700 text-teal-50 text-teal-100 text-teal-500 text-teal-600 text-teal-700 text-teal-800 border-teal-200 border-teal-600 ring-teal-400
     -->
     
     <style>
@@ -29,6 +44,9 @@
             background-color: #f8fafc;
             color: #0f172a; 
             -webkit-tap-highlight-color: transparent;
+            overflow-y: scroll;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         html { scroll-behavior: smooth; }
@@ -51,7 +69,12 @@
             to { opacity: 1; }
         }
 
-        .smooth-expand { animation: smoothExpand 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; overflow: hidden; }
+        .smooth-expand { 
+            animation: smoothExpand 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards; 
+            overflow: hidden; 
+            will-change: max-height, opacity, transform;
+            transform: translateZ(0);
+        }
         @keyframes smoothExpand {
             0% { max-height: 0; opacity: 0; transform: translateY(-10px); }
             100% { max-height: 1000px; opacity: 1; transform: translateY(0); }
@@ -100,18 +123,10 @@
             tray: `<svg class="w-8 h-8 md:w-12 md:h-12 mb-2 md:mb-3 opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-6l-2 3h-4l-2-3H2"/><path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/></svg>`
         };
 
-        // ================= قواعد البيانات =================
-
-        // بيانات قسم القصة التعليمية المضافة حديثاً
-        const STORY_SLIDES = [
-            { title: "ما الاستعارة؟", content: "تخيل أنك تستعير شيئًا من صديقك.. في البلاغة، نحن نستعير صفة من شيء لنعطيها لشيء آخر لإضافة جمال وخيال على الجملة!", icon: "📖" },
-            { title: "السر في التشبيه", content: "الاستعارة في أصلها هي (تشبيه بليغ)، لكننا قمنا بحذف أحد طرفيه الأساسيين (إما المشبه، أو المشبه به).", icon: "🔍" },
-            { title: "١. الاستعارة المكنية", content: "نخفي (نكنّي عن) المشبه به، ونترك دليلاً أو صفة تدل عليه. مثل: «بكى السحاب».. السحاب لا يبكي، الذي يبكي هو الإنسان، فاستعرنا البكاء للسحاب!", icon: "☁️" },
-            { title: "٢. الاستعارة التصريحية", content: "نصرّح بكلمة المشبه به مباشرة ونحذف المشبه بالكامل. مثل: «رأيت أسدًا يقاتل في المعركة».. قصدنا (الجندي الشجاع) لكننا صرحنا بالأسد!", icon: "🦁" },
-            { title: "٣. الاستعارة التمثيلية", content: "لا نتعامل مع كلمات مفردة هنا، بل نشبه (صورة وحالة كاملة) بصورة أخرى. وتكثر جدًا في الأمثال الشعبية والأقوال المأثورة.", icon: "🎬" },
-            { title: "مستعد للتحدي؟", content: "الآن بعد أن تعرفت على السر، حان الوقت لاختبار مهارتك في اصطياد وتصنيف الاستعارات في الأقسام التالية.. انطلق!", icon: "🚀" }
-        ];
-
+        // =========================================================================
+        // 🔒 [AI GUARD START]: ابدأ تعديل محتوى الدرس من هنا (تعديل المصفوفات والبيانات فقط)
+        // تذكر: التزم بالقواعد اللغوية (التنوين والضمائر) المذكورة في أعلى الملف.
+        // =========================================================================
         const QUIZ_QUESTIONS = [
             { text: "«ابتسمت الفرصة للشاب الطموح»\nما نوع الاستعارة هنا؟", options: ["مكنية", "تصريحية", "تمثيلية"], correct: 0, explanation: "لأنه شبه (الفرصة) بإنسان يبتسم، وحذف المشبه به وأبقى صفة من صفاته (الابتسام).", hint: "الفرصة لا تبتسم، من الذي يبتسم وحذفناه؟" },
             { text: "قال المعلق: «سجل الصقر هدف الفوز لفريقنا» (يقصد اللاعب).\nما نوع الاستعارة؟", options: ["مكنية", "تصريحية", "تمثيلية"], correct: 1, explanation: "لأنه شبه (اللاعب) بالصقر، وحذف المشبه وصرّح بلفظ المشبه به (الصقر).", hint: "من الذي يسجل الأهداف؟" },
@@ -164,15 +179,19 @@
             { text: "الاستعارة يجب أن يرافقها دليل (قرينة) يمنع المعنى الحقيقي.", answer: true, explanation: "عندما نقول (تضحك الحياة) فكلمة الحياة دليل على أننا لا نقصد الضحك الحقيقي.", hint: "الاستعارة هي نوع من المجاز." }
         ];
 
-        // تم إضافة تبويب القصة التعليمية (story) هنا
         const SECTIONS = [
             { id: 'intro', label: 'قبل أن نبدأ', theme: 'sky', baseWeight: '600', hoverWeight: '700', progressWeight: '500' },
-            { id: 'story', label: 'القصة التعليمية', theme: 'teal', baseWeight: '600', hoverWeight: '700', progressWeight: '500' },
             { id: 'classify', label: 'التصنيف', theme: 'amber', baseWeight: '600', hoverWeight: '700', progressWeight: '500' },
             { id: 'spotting', label: 'صياد الكلمات', theme: 'indigo', baseWeight: '600', hoverWeight: '700', progressWeight: '500' },
             { id: 'quiz', label: 'اختر الإجابة', theme: 'violet', baseWeight: '600', hoverWeight: '700', progressWeight: '500' },
             { id: 'tf', label: 'صواب وخطأ', theme: 'emerald', baseWeight: '600', hoverWeight: '700', progressWeight: '500' }
         ];
+        // =========================================================================
+        // ⬆️ نهاية بيانات الدرس ⬆️
+        // =========================================================================
+        // 🛑 [AI GUARD WARNING]: توقف هنا! ممنوع منعاً باتاً تعديل أي سطر برمجي أو دالة JavaScript أو CSS أسفل هذا السطر نهائياً.
+        // مسموح بالتعديل هنا فقط إذا طلب منك المستخدم نصاً "إضافة نوع نشاط جديد كلياً".
+        // =========================================================================
 
         // ================= كائن التطبيق الرئيسي =================
         const App = {
@@ -180,13 +199,11 @@
                 activeTab: 'intro',
                 progress: {
                     intro: { answered: 0, total: 0, score: 0 },
-                    story: { answered: 1, total: STORY_SLIDES.length, score: 1 }, // إضافة تتبع القصة
                     classify: { answered: 0, total: CLASSIFY_PHRASES.length, score: 0 },
                     spotting: { answered: 0, total: SPOTTING_QUESTIONS.length, score: 0 },
                     quiz: { answered: 0, total: QUIZ_QUESTIONS.length, score: 0 },
                     tf: { answered: 0, total: TF_QUESTIONS.length, score: 0 }
                 },
-                storyData: { currentIndex: 0, maxViewed: 0 }, // بيانات القصة التعليمية
                 quizData: [],
                 tfData: [],
                 spottingData: [],
@@ -206,8 +223,6 @@
             },
 
             initSectionData() {
-                this.state.storyData = { currentIndex: 0, maxViewed: 0 }; // تهيئة القصة
-
                 this.state.quizData = shuffleArray(QUIZ_QUESTIONS).map((q, idx) => {
                     const mappedOptions = q.options.map((opt, oIdx) => ({ text: opt, isCorrect: oIdx === q.correct }));
                     return { originalQuestion: q, options: mappedOptions, answered: false, selectedOption: null, showHint: false };
@@ -233,6 +248,7 @@
             },
 
             renderLayout() {
+                // 🛑 [AI GUARD]: ممنوع تعديل الهيكل الأساسي أو الترويسة (Header) أو التذييل (Footer)
                 const root = document.getElementById('app-root');
                 root.innerHTML = `
                     <div id="main-header" class="w-full text-center py-6 bg-transparent flex flex-col items-center">
@@ -265,7 +281,6 @@
                             ${this.renderIntroSectionHTML()}
                         </div>
                         
-                        <div id="section-story" class="hidden"></div> <!-- حاوية القصة التعليمية -->
                         <div id="section-classify" class="hidden"></div>
                         <div id="section-spotting" class="hidden"></div>
                         <div id="section-quiz" class="hidden"></div>
@@ -286,9 +301,7 @@
                 this.updateTabs();
                 this.updateSectionsVisibility();
                 
-                if (this.state.activeTab === 'story') {
-                    document.getElementById('section-story').innerHTML = this.renderStorySectionHTML(); // دمج القصة التعليمية
-                } else if (this.state.activeTab === 'classify') {
+                if (this.state.activeTab === 'classify') {
                     document.getElementById('section-classify').innerHTML = this.renderClassifySectionHTML();
                 } else if (this.state.activeTab === 'spotting') {
                     document.getElementById('section-spotting').innerHTML = this.renderStandardSectionHTML('spotting');
@@ -335,7 +348,6 @@
             updateSectionsVisibility() {
                 const subtitles = {
                     intro: 'مراجعة سريعة ومبسطة لأنواع الاستعارة قبل بدء التدريبات',
-                    story: 'شاهد القصة التعليمية وتعرف على أسرار الاستعارة خطوة بخطوة', // وصف التبويب الجديد
                     classify: 'اقرأ العبارة بدقة، ثم حدد نوع الاستعارة الصحيح لنقلها إلى الصندوق المناسب',
                     spotting: 'ابحث عن الكلمة الخيالية! حدد الكلمة التي تمثل الاستعارة في كل جملة',
                     quiz: 'اقرأ السؤال جيدًا، ثم اختر الإجابة الصحيحة من الخيارات المتاحة',
@@ -377,98 +389,6 @@
                     footerArea.innerHTML = `<div class="smooth-expand w-full">${this.renderSectionFooterControls(sectionId, true)}</div>`;
                 }
             },
-
-            // ================= دالة عرض القصة التعليمية (الجديدة) =================
-            renderStorySectionHTML() {
-                const state = this.state.storyData;
-                const slide = STORY_SLIDES[state.currentIndex];
-                const isLast = state.currentIndex === STORY_SLIDES.length - 1;
-                const theme = 'teal';
-
-                // رسم شرائط التقدم العلوية (مثل انستغرام)
-                let progressBarsHTML = STORY_SLIDES.map((_, idx) => {
-                    const widthClass = idx <= state.currentIndex ? 'w-full' : 'w-0';
-                    return `
-                        <div class="h-1.5 flex-1 rounded-full bg-slate-200 overflow-hidden">
-                            <div class="h-full bg-${theme}-500 transition-all duration-300 ${widthClass}"></div>
-                        </div>
-                    `;
-                }).join('');
-
-                return `
-                    <div class="max-w-md mx-auto w-full fade-in pb-4">
-                        <!-- شرائط التقدم -->
-                        <div class="flex gap-1.5 mb-4 px-2" dir="ltr">
-                            ${progressBarsHTML}
-                        </div>
-
-                        <!-- البطاقة الرئيسية -->
-                        <div class="bg-white rounded-[2rem] shadow-xl border border-slate-100 relative aspect-[9/13] flex flex-col overflow-hidden group select-none">
-                            
-                            <!-- مساحات النقر المخفية (طريقة ستوري السوشيال ميديا: 30% يمين للرجوع، 70% يسار للتقدم) -->
-                            <div class="absolute inset-y-0 right-0 w-[30%] z-30 cursor-pointer" onclick="App.handleStoryPrev()"></div>
-                            <div class="absolute inset-y-0 left-0 w-[70%] z-30 cursor-pointer" onclick="App.handleStoryNext()"></div>
-
-                            <!-- منطقة الأيقونة العلوية -->
-                            <div class="flex-1 bg-gradient-to-br from-${theme}-50 to-${theme}-100 flex items-center justify-center p-8 relative z-0">
-                                <div class="text-[6rem] md:text-[8rem] drop-shadow-md smooth-expand text-center leading-none">
-                                    ${slide.icon}
-                                </div>
-                            </div>
-
-                            <!-- منطقة المحتوى النصي -->
-                            <div class="p-6 md:p-8 bg-white relative z-0 flex flex-col min-h-[45%] border-t-2 border-${theme}-50 justify-center">
-                                <h3 class="text-2xl md:text-3xl font-bold text-slate-800 mb-4 text-center">${slide.title}</h3>
-                                <p class="text-lg md:text-xl text-slate-600 leading-relaxed text-center mb-6">${slide.content}</p>
-
-                                <!-- تلميح مرئي للتنقل (يظهر في الشريحة الأولى فقط) -->
-                                <div class="mt-auto w-full text-center relative z-40 pointer-events-none">
-                                    ${state.currentIndex === 0 ? '<span class="inline-block bg-slate-100 text-slate-500 px-4 py-2 rounded-full text-sm font-medium animate-pulse">👆 اضغط على جانبي البطاقة للتنقل</span>' : '<div class="h-9"></div>'}
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- زر المتابعة يظهر في الشريحة الأخيرة -->
-                        ${isLast ? `
-                            <div class="mt-8 flex justify-center fade-in">
-                                <button onclick="App.handleNextSection()" class="w-full md:w-auto px-10 py-4 rounded-full font-bold text-xl md:text-2xl text-white bg-${theme}-600 hover:bg-${theme}-700 shadow-lg transition-transform active:scale-95 flex items-center justify-center gap-3 relative z-40">
-                                    هيا نبدأ التدريبات ${ICONS.arrowLeft}
-                                </button>
-                            </div>
-                        ` : ''}
-                    </div>
-                `;
-            },
-            
-            // دوال التنقل داخل القصة التعليمية
-            handleStoryNext() {
-                const state = this.state.storyData;
-                if (state.currentIndex < STORY_SLIDES.length - 1) {
-                    state.currentIndex++;
-                    
-                    // تحديث شريط التقدم الكلي للقسم عند اكتشاف شريحة جديدة
-                    if (state.currentIndex > state.maxViewed) {
-                        state.maxViewed = state.currentIndex;
-                        this.state.progress.story.answered = state.maxViewed + 1;
-                        this.state.progress.story.score = state.maxViewed + 1;
-                        this.updateTabs();
-                        this.checkFinalEvaluation();
-                    }
-                    
-                    this.updateUI();
-                } else {
-                    this.handleNextSection();
-                }
-            },
-
-            handleStoryPrev() {
-                const state = this.state.storyData;
-                if (state.currentIndex > 0) {
-                    state.currentIndex--;
-                    this.updateUI();
-                }
-            },
-            // ================= نهاية إضافات القصة التعليمية =================
 
             renderIntroSectionHTML() {
                 return `
@@ -531,7 +451,7 @@
 
                         <div class="flex justify-center mt-10 pt-4">
                             <button onclick="App.handleNextSection()" class="bg-sky-600 text-white font-semibold text-xl py-4 px-12 rounded-full shadow-md flex items-center gap-3 active:scale-95 transition-transform hover:bg-sky-700 hover:shadow-lg">
-                                المتابعة للقصة التعليمية
+                                هيا نبدأ التدريبات
                                 ${ICONS.arrowLeft}
                             </button>
                         </div>
@@ -683,10 +603,9 @@
                     if (!answered) {
                         wordClass += `bg-white border-2 border-slate-200 text-slate-700 hover:border-${theme}-300 hover:bg-${theme}-50 hover:-translate-y-1 hover:shadow-md active:scale-95 cursor-pointer`;
                     } else {
-                        if (isSelected && isCorrect) wordClass += "bg-emerald-500 text-white border-2 border-emerald-600 shadow-md scale-105";
-                        else if (isSelected && !isCorrect) wordClass += "bg-rose-500 text-white border-2 border-rose-600 shadow-md scale-105";
-                        else if (!isSelected && isCorrect) wordClass += "bg-emerald-50 text-emerald-700 border-2 border-emerald-300 ring-2 ring-emerald-200";
-                        else wordClass += "bg-slate-50 border-2 border-slate-100 text-slate-400 opacity-50 cursor-default";
+                        if (isSelected && isCorrect) wordClass += "bg-emerald-500 text-white border-2 border-emerald-600 shadow-md z-10 cursor-default ";
+                        else if (isSelected && !isCorrect) wordClass += "bg-rose-500 text-white border-2 border-rose-600 shadow-md z-10 cursor-default ";
+                        else wordClass += "bg-white border-2 border-slate-200 text-slate-700 cursor-default ";
                     }
 
                     wordsHTML += `
@@ -811,7 +730,7 @@
 
                     html += `
                         <div class="flex flex-col items-center w-full">
-                            <div class="w-full bg-white p-5 md:p-6 rounded-3xl shadow-lg border-2 border-slate-200 transition-colors duration-300 relative z-10 flex flex-col justify-start ${animatingOut ? 'fly-out' : 'fade-in'}">
+                            <div id="classify-main-card" class="w-full bg-white p-5 md:p-6 rounded-3xl shadow-lg border-2 border-slate-200 transition-colors duration-300 relative z-10 flex flex-col justify-start ${animatingOut ? 'fly-out' : 'fade-in'}">
                                 
                                 <div class="bg-slate-50 p-4 md:p-6 rounded-xl border border-slate-100 mb-6 w-full mx-auto">
                                     <div class="flex items-center justify-between mb-2 md:mb-3">
@@ -833,7 +752,7 @@
                                     </div>
                                 </div>
 
-                                <div class="${status !== 'idle' ? `block w-full ${feedbackFadeClass}` : 'hidden'}">
+                                <div id="classify-feedback-area" class="${status !== 'idle' ? `block w-full ${feedbackFadeClass}` : 'hidden'}">
                                     <div class="mt-2 mb-4 p-5 rounded-2xl border text-right ${status === 'correct' ? 'bg-emerald-50 border-emerald-200' : 'bg-rose-50 border-rose-200'}">
                                         <div class="flex items-center justify-start gap-2 mb-3 font-bold text-xl md:text-2xl ${status === 'correct' ? 'text-emerald-700' : 'text-rose-700'}">
                                             ${status === 'correct' ? ICONS.checkCircleLarge : ICONS.xCircleLarge}
@@ -852,7 +771,7 @@
                                     </div>
                                 </div>
                                 
-                                <div class="flex flex-row w-full max-w-lg mx-auto gap-2 md:gap-4 mt-2 relative z-0">
+                                <div id="classify-boxes-area" class="flex flex-row w-full max-w-lg mx-auto gap-2 md:gap-4 mt-2 relative z-0">
                                     ${boxesHTML}
                                 </div>
                             </div>
@@ -898,6 +817,35 @@
                 `;
             },
 
+            updateClassifyPartial() {
+                const newHTML = this.renderClassifySectionHTML();
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = newHTML;
+
+                const mainCard = document.getElementById('classify-main-card');
+                const newMainCard = tempDiv.querySelector('#classify-main-card');
+
+                if (mainCard && newMainCard) {
+                    mainCard.className = newMainCard.className;
+                    
+                    const feedbackArea = document.getElementById('classify-feedback-area');
+                    const newFeedbackArea = tempDiv.querySelector('#classify-feedback-area');
+                    if (feedbackArea && newFeedbackArea) {
+                        feedbackArea.className = newFeedbackArea.className;
+                        feedbackArea.innerHTML = newFeedbackArea.innerHTML;
+                    }
+                    
+                    const boxesArea = document.getElementById('classify-boxes-area');
+                    const newBoxesArea = tempDiv.querySelector('#classify-boxes-area');
+                    if (boxesArea && newBoxesArea) {
+                        boxesArea.innerHTML = newBoxesArea.innerHTML;
+                    }
+                } else {
+                    const sectionEl = document.getElementById('section-classify');
+                    if (sectionEl) sectionEl.innerHTML = newHTML;
+                }
+            },
+
             toggleHint(sectionId, idx) {
                 const qState = sectionId === 'classify' ? this.state.classifyData.questions[idx] : this.state[`${sectionId}Data`][idx];
                 qState.showHint = !qState.showHint;
@@ -911,6 +859,7 @@
                         hintArea.className = 'hidden';
                     }
                 } else {
+                    // كخيار احتياطي إذا لم يُعثر على العنصر يتم التحديث الشامل
                     this.updateUI();
                 }
                 
@@ -988,27 +937,27 @@
                     currentQuestionState.hasErrored = true;
                 }
                 
-                this.updateUI();
+                this.updateClassifyPartial();
                 state.feedbackAnimate = false; 
             },
 
             handleSortRetry() {
                 const state = this.state.classifyData;
                 state.status = 'idle';
-                this.updateUI();
+                this.updateClassifyPartial();
             },
 
             handleSortContinue() {
                 const state = this.state.classifyData;
                 state.animatingOut = true;
-                this.updateUI();
+                this.updateClassifyPartial();
                 
                 setTimeout(() => {
                     state.currentIndex++;
                     state.status = 'idle';
                     state.animatingOut = false;
                     this.updateUI();
-                }, 300);
+                }, 400);
             },
 
             recordProgress(sectionId, isCorrect) {
@@ -1068,13 +1017,7 @@
             handleResetSection(sectionId) {
                 this.state.progress[sectionId].answered = 0;
                 this.state.progress[sectionId].score = 0;
-                
-                // إعادة تهيئة القصة التعليمية
-                if (sectionId === 'story') {
-                    this.state.storyData = { currentIndex: 0, maxViewed: 0 };
-                    this.state.progress.story = { answered: 1, total: STORY_SLIDES.length, score: 1 };
-                }
-                else if (sectionId === 'quiz' || sectionId === 'tf' || sectionId === 'spotting') {
+                if (sectionId === 'quiz' || sectionId === 'tf' || sectionId === 'spotting') {
                     let sourceData = sectionId === 'quiz' ? QUIZ_QUESTIONS : (sectionId === 'tf' ? TF_QUESTIONS : SPOTTING_QUESTIONS);
                     let newData = shuffleArray(sourceData).map(q => {
                         let options = [];
@@ -1096,7 +1039,6 @@
             handleGlobalRestart() {
                 this.state.progress = {
                     intro: { answered: 0, total: 0, score: 0 },
-                    story: { answered: 1, total: STORY_SLIDES.length, score: 1 }, // إعادة تعيين القصة
                     classify: { answered: 0, total: CLASSIFY_PHRASES.length, score: 0 },
                     spotting: { answered: 0, total: SPOTTING_QUESTIONS.length, score: 0 },
                     quiz: { answered: 0, total: QUIZ_QUESTIONS.length, score: 0 },
